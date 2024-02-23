@@ -19,10 +19,24 @@
             # add build phases here
             # default = 
           };
+          checks = {
+            spellcheck = pkgs.stdenv.mkDerivation {
+              name = "spellcheck";
+              dontUnpack = true;
+              src = ./.;
+              buildInputs = [ pkgs.nodePackages.cspell ];
+              doCheck = true;
+              checkPhase = ''
+                cd $src/.
+                cspell lint --no-progress "**"
+                touch $out
+              '';
+            };
+          };
           devShells = {
             default = pkgs.mkShell {
               # add your developer tools here
-              buildInputs = with pkgs; [ ponysay ];
+              buildInputs = with pkgs; [ nodePackages.cspell ];
             };
           };
         };
