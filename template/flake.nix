@@ -36,9 +36,8 @@
           devShells = {
             default = pkgs.mkShell {
               # add your developer tools here
-              buildInputs = with pkgs; [ nodePackages.cspell ];
+              buildInputs = with pkgs; [ nodePackages.cspell nil ];
             };
           };
-        };
     };
 }
